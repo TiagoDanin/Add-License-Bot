@@ -50,14 +50,24 @@ module.exports = app => {
 		}).catch((e) => e)
 	}
 
-	app.on(['installation', 'installation_repositories'], async (ctx) => {
-		if (ctx.payload && ctx.payload.repositories) {
-			for (var repo of ctx.payload.repositories) {
-				await createFile(ctx.github, {
-					owner: repo.full_name.replace(`/${repo.name}`, ''),
-					repo: repo.name
-				})
+	app.on([
+		'installation',
+		'installation_repositories',
+		'integration_installation_repositories'
+	], async (ctx) => {
+		var repositories = []
+		if (ctx.payload) {
+			if (ctx.payload.repositories) {
+				repositories = ctx.payload.repositories
+			} else if (ctx.payload.repositories_added) {
+				repositories = ctx.payload.repositories_added
 			}
+		}
+		for (var repo of repositories) {
+			await createFile(ctx.github, {
+				owner: repo.full_name.replace(`/${repo.name}`, ''),
+				repo: repo.name
+			})
 		}
 		return
 	})
