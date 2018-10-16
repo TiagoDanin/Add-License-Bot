@@ -2,6 +2,8 @@
 
 Generate LICENSE file from package.json
 
+![image](https://user-images.githubusercontent.com/5731176/47037452-5a2b1b80-d155-11e8-9d43-4972a459205b.png)
+
 ## Setup
 
 ```sh
