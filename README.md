@@ -38,6 +38,10 @@ If you have suggestions for how Add-License-Bot could be improved, or want to re
 
 For more, check out the [Contributing Guide](CONTRIBUTING.md).
 
+## Thanks
+
+- [@wmhilton](https://github.com/wmhilton) - [zeke/package-json-to-readme/issues/32#issuecomment-421673622](https://github.com/zeke/package-json-to-readme/issues/32#issuecomment-421673622)
+
 ## License
 
 [MIT](LICENSE) © 2018 TiagoDanin <TiagoDanin@outlook.com> (http://tiagodanin.github.io/Add-License-Bot)
