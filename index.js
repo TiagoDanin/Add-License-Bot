@@ -7,7 +7,51 @@ module.exports = app => {
 		'license',
 		'license.md'
 	]
-	const createFile = async (github, params) => {
+
+	const createFile = async (github, params, licenseRaw) => {
+		const refMaster = await github.gitdata.getReference({
+			...params,
+			ref: 'heads/master'
+		}).catch((e) => e)
+		if (refMaster && refMaster.data) {
+			var refAddLicense = await github.gitdata.createReference({
+				...params,
+				ref: 'refs/heads/add-license',
+				sha: refMaster.data.object.sha
+			}).catch((e) => e)
+
+			if (!refAddLicense || !refAddLicense.data) {
+				app.log('Pull request already exists', params)
+				return 'Pull request already exists'
+			}
+
+			app.log('Create file & pull request', params)
+			await github.repos.createFile({
+				...params,
+				branch: 'add-license',
+				path: 'LICENSE',
+				message: 'feat: add missing LICENSE',
+				content: Buffer.from(licenseRaw).toString('base64')
+			}).catch((e) => e)
+
+			return await github.pullRequests.create({
+				...params,
+				title: 'Add missing LICENSE',
+				head: 'add-license',
+				base: 'master',
+				body: `**Summary**
+
+- Add missing LICENSE
+
+Via [github.com/apps/Add-License-Bot](https://github.com/apps/Add-License-Bot).
+				`,
+				maintainer_can_modify: true
+			}).catch((e) => e)
+		}
+		return 'Not found master'
+	}
+
+	const checkFiles = async (github, params) => {
 		app.log('Analyzed', params)
 		for (var filename of files) {
 			params.path = filename
@@ -18,7 +62,7 @@ module.exports = app => {
 			}
 		}
 		params.path = 'package.json'
-		return github.repos.getContent(params).then((res) => {
+		return github.repos.getContent(params).then(async (res) => {
 			if (res && res.data && res.data.sha) {
 				app.log('Found package.json', params)
 				var content = Buffer.from(res.data.content, 'base64').toString()
@@ -30,8 +74,7 @@ module.exports = app => {
 				}
 				var licenseType = (content.license || '').toString().toLocaleLowerCase()
 				var author = (content.author || params.owner).toString()
-				app.log(licenseType)
-				app.log(author)
+				app.log('Package.json', licenseType, author)
 				for (var license in spdxLicenseList) {
 					if (license.toLocaleLowerCase() == licenseType) {
 						var licenseRaw = spdxLicenseList[license].licenseText.replace(
@@ -39,11 +82,14 @@ module.exports = app => {
 						).replace(
 							'<copyright holders>', author
 						)
-						params.path = 'LICENSE'
-						params.message = 'feat: add missing LICENSE'
-						params.content = Buffer.from(licenseRaw).toString('base64')
-						app.log('Create file', params)
-						return github.repos.createFile(params)
+						return await createFile(
+							github,
+							{
+								owner: params.owner,
+								repo: params.repo
+							},
+							licenseRaw
+						)
 					}
 				}
 			}
@@ -64,7 +110,7 @@ module.exports = app => {
 			}
 		}
 		for (var repo of repositories) {
-			await createFile(ctx.github, {
+			await checkFiles(ctx.github, {
 				owner: repo.full_name.replace(`/${repo.name}`, ''),
 				repo: repo.name
 			})
@@ -73,7 +119,6 @@ module.exports = app => {
 	})
 
 	app.on('push', async (ctx) => {
-		await createFile(ctx.github, ctx.repo({}))
-		return
+		return await checkFiles(ctx.github, ctx.repo({}))
 	})
 }

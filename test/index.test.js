@@ -3,7 +3,7 @@ const myProbotApp = require('..')
 
 const payload = require('./fixtures/installation.json')
 
-describe('Hacktoberfest Auto Label Bot', () => {
+describe('Add License Bot', () => {
 	let app, github
 	beforeEach(() => {
 		app = new Application()
@@ -27,16 +27,31 @@ describe('Hacktoberfest Auto Label Bot', () => {
 					})
 				}),
 				createFile: jest.fn().mockReturnValue(Promise.resolve({}))
+			},
+			gitdata: {
+				getReference: jest.fn().mockReturnValue(Promise.resolve({
+					data: {
+						object: {
+							sha: '1234567890'
+						}
+					}
+				})),
+				createReference: jest.fn().mockReturnValue(Promise.resolve({
+					data: {}
+				})),
+			},
+			pullRequests: {
+				create: jest.fn().mockReturnValue(Promise.resolve({}))
 			}
 		}
 		app.auth = () => Promise.resolve(github)
 	})
 
-	test('An issue is opened', async () => {
+	test('installation', async () => {
 		await app.receive({
 			name: 'installation',
 			payload: payload
 		})
-		expect(github.repos.createFile).toHaveBeenCalled()
+		expect(github.pullRequests.create).toHaveBeenCalled()
 	})
 })
