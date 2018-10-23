@@ -4,6 +4,9 @@ Generate LICENSE file from package.json
 
 ![image](https://user-images.githubusercontent.com/5731176/47037452-5a2b1b80-d155-11e8-9d43-4972a459205b.png)
 
+## Public App
+- [github.com/apps/Add-License-Bot](https://github.com/apps/Add-License-Bot)
+
 ## Setup
 
 ```sh
