@@ -8,47 +8,34 @@ module.exports = app => {
 		'license.md'
 	]
 
-	const createFile = async (github, params, licenseRaw) => {
-		const refMaster = await github.gitdata.getReference({
+	const createFile = async (github, params, license, author) => {
+		var licenseRaw = license.licenseText.replace(
+			'<year>', new Date().getFullYear()
+		).replace(
+			'<copyright holders>', author
+		)
+
+		app.log('Create file', params)
+		return await github.repos.createFile({
 			...params,
-			ref: 'heads/master'
-		}).catch((e) => e)
-		if (refMaster && refMaster.data) {
-			var refAddLicense = await github.gitdata.createReference({
-				...params,
-				ref: 'refs/heads/add-license',
-				sha: refMaster.data.object.sha
-			}).catch((e) => e)
-
-			if (!refAddLicense || !refAddLicense.data) {
-				app.log('Pull request already exists', params)
-				return 'Pull request already exists'
+			path: 'LICENSE',
+			message: 'feat: add missing LICENSE',
+			content: Buffer.from(licenseRaw).toString('base64')
+		}).then(async (res) => {
+			if (res && res.data) {
+				return github.repos.createCommitComment({
+					...params,
+					sha: res.data.commit.sha,
+					body: `**License Info.**
+Author: \`${author}\`
+License type: ${license.name}
+Repository owner: @${params.owner}
+					`,
+					path: 'LICENSE',
+				}).catch((e) => e)
 			}
-
-			app.log('Create file & pull request', params)
-			await github.repos.createFile({
-				...params,
-				branch: 'add-license',
-				path: 'LICENSE',
-				message: 'feat: add missing LICENSE',
-				content: Buffer.from(licenseRaw).toString('base64')
-			}).catch((e) => e)
-
-			return await github.pullRequests.create({
-				...params,
-				title: 'Add missing LICENSE',
-				head: 'add-license',
-				base: 'master',
-				body: `**Summary**
-
-- Add missing LICENSE
-
-Via [github.com/apps/Add-License-Bot](https://github.com/apps/Add-License-Bot).
-				`,
-				maintainer_can_modify: true
-			}).catch((e) => e)
-		}
-		return 'Not found master'
+			return 'Falid create file'
+		}).catch((e) => e)
 	}
 
 	const checkFiles = async (github, params) => {
@@ -77,18 +64,14 @@ Via [github.com/apps/Add-License-Bot](https://github.com/apps/Add-License-Bot).
 				app.log('Package.json', licenseType, author)
 				for (var license in spdxLicenseList) {
 					if (license.toLocaleLowerCase() == licenseType) {
-						var licenseRaw = spdxLicenseList[license].licenseText.replace(
-							'<year>', new Date().getFullYear()
-						).replace(
-							'<copyright holders>', author
-						)
 						return await createFile(
 							github,
 							{
 								owner: params.owner,
 								repo: params.repo
 							},
-							licenseRaw
+							spdxLicenseList[license],
+							author
 						)
 					}
 				}

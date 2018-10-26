@@ -26,22 +26,16 @@ describe('Add License Bot', () => {
 						}
 					})
 				}),
-				createFile: jest.fn().mockReturnValue(Promise.resolve({}))
-			},
-			gitdata: {
-				getReference: jest.fn().mockReturnValue(Promise.resolve({
+				createFile: jest.fn().mockReturnValue(Promise.resolve({
 					data: {
-						object: {
-							sha: '1234567890'
+						commit: {
+							sha: {
+								sha: '1234567890'
+							}
 						}
 					}
 				})),
-				createReference: jest.fn().mockReturnValue(Promise.resolve({
-					data: {}
-				})),
-			},
-			pullRequests: {
-				create: jest.fn().mockReturnValue(Promise.resolve({}))
+				createCommitComment: jest.fn().mockReturnValue(Promise.resolve({}))
 			}
 		}
 		app.auth = () => Promise.resolve(github)
@@ -52,6 +46,6 @@ describe('Add License Bot', () => {
 			name: 'installation',
 			payload: payload
 		})
-		expect(github.pullRequests.create).toHaveBeenCalled()
+		expect(github.repos.createCommitComment).toHaveBeenCalled()
 	})
 })
