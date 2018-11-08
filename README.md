@@ -1,10 +1,8 @@
 # Add License Bot [![Build Status](https://travis-ci.org/TiagoDanin/Add-License-Bot.svg?branch=master)](https://travis-ci.org/TiagoDanin/Add-License-Bot)
 
-Generate LICENSE file from package.json
-
 ![image](https://user-images.githubusercontent.com/5731176/48219879-8dd01e80-e36c-11e8-9d5f-d0c386343cf7.png)
 
-### Summary
+## Summary
 If your repository does not have a file with name:
 - LICENSE
 - LICENSE.md
@@ -13,15 +11,15 @@ If your repository does not have a file with name:
 
 A license file will be generated from package.json.
 
-### Permission
+## Permission
 - **Read** access to code.
 - **Read** and **write** access to single file ("LICENSE").
 
-### Notification
+## Notification
 The bot will mention you in a comment.
 
 ## Public App
-- [github.com/apps/Add-License-Bot](https://github.com/apps/Add-License-Bot)
+- [github.com/apps/Add-License](https://github.com/apps/Add-License)
 
 ## Setup
 

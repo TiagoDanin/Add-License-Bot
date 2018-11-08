@@ -124,7 +124,7 @@ default_permissions:
 
 # The name of the GitHub App. Defaults to the name specified in package.json
 # name: My Probot App
-name: Add License Bot
+name: Add License
 
 # The homepage of your GitHub App.
 # url: https://example.com/
