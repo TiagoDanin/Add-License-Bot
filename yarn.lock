@@ -3753,9 +3753,9 @@ spdx-license-ids@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.1.tgz#e2a303236cac54b04031fa7a5a79c7e701df852f"
 
-spdx-license-list@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/spdx-license-list/-/spdx-license-list-4.1.0.tgz#29cfa3248a45fdf314b9a82974c06fb3b9352b89"
+spdx-license-list@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/spdx-license-list/-/spdx-license-list-5.0.0.tgz#d100186631ec16774094632c22a7a693c39df903"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"

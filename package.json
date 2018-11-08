@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "probot": "7.3.1",
-    "spdx-license-list": "4.1.0"
+    "spdx-license-list": "5.0.0"
   },
   "devDependencies": {
     "jest": "23.6.0",
