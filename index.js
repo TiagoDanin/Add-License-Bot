@@ -1,4 +1,4 @@
-const spdxLicenseList = require('spdx-license-list/full')
+const choosealicense = require('choosealicense-list')
 module.exports = app => {
 	app.log('Yay, the app was loaded!')
 	const files = [
@@ -9,12 +9,22 @@ module.exports = app => {
 	]
 
 	const createFile = async (github, params, license, author) => {
-		var licenseRaw = license.licenseText.replace(
-			'<year>', new Date().getFullYear()
+		var licenseRaw = license.body.replace(
+			/\[year\]/gi, new Date().getFullYear()
 		).replace(
-			'<copyright holders>', author
+			/\[fullname\]/gi, author
+		).replace(
+			/\[login\]/gi, author
+		).replace(
+			/\s\(\[email\]\)/gi, ''
+		).replace(
+			/\[project\]/gi, params.repo
+		).replace(
+			/\[description\]/gi, ''
+		).replace(
+			/\[projecturl\]/gi, `https://github.com/${params.owner}/${params.repo}`
 		)
-
+		app.log('License:', licenseRaw)
 		app.log('Create file', params)
 		return await github.repos.createFile({
 			...params,
@@ -23,12 +33,13 @@ module.exports = app => {
 			content: Buffer.from(licenseRaw).toString('base64')
 		}).then(async (res) => {
 			if (res && res.data) {
+				app.log('Create commit comment', params)
 				return github.repos.createCommitComment({
 					...params,
 					sha: res.data.commit.sha,
 					body: `**License Info.**
 Author: \`${author}\`
-License type: ${license.name}
+License type: ${license.title}
 Repository owner: @${params.owner}
 					`,
 					path: 'LICENSE',
@@ -59,22 +70,23 @@ Repository owner: @${params.owner}
 					app.log('Invalid package.json', params)
 					return e
 				}
-				var licenseType = (content.license || '').toString().toLocaleLowerCase()
+				var licenseType = (content.license || '').toString()
 				var author = (content.author || params.owner).toString()
 				app.log('Package.json', licenseType, author)
-				for (var license in spdxLicenseList) {
-					if (license.toLocaleLowerCase() == licenseType) {
-						return await createFile(
-							github,
-							{
-								owner: params.owner,
-								repo: params.repo
-							},
-							spdxLicenseList[license],
-							author
-						)
-					}
+
+				var license = choosealicense.find(licenseType)
+				if (license) {
+					return await createFile(
+						github,
+						{
+							owner: params.owner,
+							repo: params.repo
+						},
+						license,
+						author
+					)
 				}
+				return 'Not found license'
 			}
 		}).catch((e) => e)
 	}
