@@ -71,7 +71,15 @@ Repository owner: @${params.owner}
 					return e
 				}
 				var licenseType = (content.license || '').toString()
-				var author = (content.author || params.owner).toString()
+				var author = params.owner
+				if (typeof content.author == 'object' && content.author.name) {
+					author = content.author.name
+					if (content.author.email) {
+						author += ` <${content.author.email}>`
+					}
+				} else if (typeof content.author == 'string') {
+					author = content.author
+				}
 				app.log('Package.json', licenseType, author)
 
 				var license = choosealicense.find(licenseType)
