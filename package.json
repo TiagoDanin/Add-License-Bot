@@ -1,6 +1,6 @@
 {
   "name": "add-license-bot",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Generate LICENSE file from package.json",
   "author": "TiagoDanin <TiagoDanin@outlook.com>",
   "license": "MIT",
