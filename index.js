@@ -42,6 +42,7 @@ Author: \`${author}\`
 License type: ${license.title}
 Repository owner: @${params.owner}
 					`,
+					position: 1,
 					path: 'LICENSE',
 				}).catch((e) => e)
 			}
