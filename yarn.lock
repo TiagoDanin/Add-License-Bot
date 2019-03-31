@@ -3569,9 +3569,9 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
-smee-client@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/smee-client/-/smee-client-1.0.2.tgz#2b7e72d7ab383e5d6e4a17ae00cd07503cbcf25d"
+smee-client@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/smee-client/-/smee-client-1.1.0.tgz#9dc7fd90e4cb6d36dee7501de0404209d445bb89"
   dependencies:
     commander "^2.12.2"
     eventsource "^1.0.5"
