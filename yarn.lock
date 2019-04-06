@@ -631,9 +631,9 @@ chokidar@^2.0.4:
   optionalDependencies:
     fsevents "^1.2.2"
 
-choosealicense-list@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/choosealicense-list/-/choosealicense-list-1.1.0.tgz#ce147b3735319e19bc29860a2bd9c8b8d849bcd8"
+choosealicense-list@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/choosealicense-list/-/choosealicense-list-1.1.1.tgz#6bb2e1af21a48ffe3c613dbad5a9161364ad69c4"
 
 chownr@^1.0.1:
   version "1.1.1"
