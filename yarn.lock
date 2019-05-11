@@ -30,11 +30,10 @@
     universal-user-agent "^2.0.0"
     url-template "^2.0.8"
 
-"@octokit/webhooks@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-5.0.2.tgz#fbf31398f0d235199591cef3c4a8fef7073c6073"
+"@octokit/webhooks@^6.0.1":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-6.2.0.tgz#9eb5e7bec0f7710702a095f2577ecbe61d53f414"
   dependencies:
-    buffer-equal-constant-time "^1.0.1"
     debug "^4.0.0"
 
 "@types/supports-color@^5.3.0":
@@ -508,7 +507,7 @@ btoa-lite@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/btoa-lite/-/btoa-lite-1.0.0.tgz#337766da15801210fdd956c22e9c6891ab9d0337"
 
-buffer-equal-constant-time@1.0.1, buffer-equal-constant-time@^1.0.1:
+buffer-equal-constant-time@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
 
@@ -612,7 +611,7 @@ charenc@~0.0.1:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
 
-chokidar@^2.1.0:
+chokidar@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.5.tgz#0ae8434d962281a5f56c72869e79cb6d9d86ad4d"
   dependencies:
@@ -630,7 +629,7 @@ chokidar@^2.1.0:
   optionalDependencies:
     fsevents "^1.2.7"
 
-choosealicense-list@1.1.1:
+choosealicense-list@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/choosealicense-list/-/choosealicense-list-1.1.1.tgz#6bb2e1af21a48ffe3c613dbad5a9161364ad69c4"
 
@@ -2258,7 +2257,14 @@ js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.7.0, js-yaml@^3.9.1:
+js-yaml@^3.13.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
+js-yaml@^3.7.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   dependencies:
@@ -2773,11 +2779,11 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-nodemon@1.18.10:
-  version "1.18.10"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.18.10.tgz#3ba63f64eb4c283cf3e4f75f30817e9d4f393afe"
+nodemon@^1.18.10:
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-1.19.0.tgz#358e005549a1e9e1148cb2b9b8b28957dc4e4527"
   dependencies:
-    chokidar "^2.1.0"
+    chokidar "^2.1.5"
     debug "^3.1.0"
     ignore-by-default "^1.0.1"
     minimatch "^3.0.4"
@@ -3145,12 +3151,12 @@ private@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
 
-probot@7.5.1:
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/probot/-/probot-7.5.1.tgz#dc85f0f9bcc10d13c7d158f2e6356c7c33877738"
+probot@7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/probot/-/probot-7.5.3.tgz#419e9219a9ebab453adb272fed4eae7d4865b4c6"
   dependencies:
     "@octokit/rest" "^15.18.0"
-    "@octokit/webhooks" "^5.0.2"
+    "@octokit/webhooks" "^6.0.1"
     "@types/supports-color" "^5.3.0"
     bottleneck "^2.8.0"
     bunyan "^1.8.12"
@@ -3163,7 +3169,7 @@ probot@7.5.1:
     express-async-errors "^3.0.0"
     hbs "^4.0.3"
     is-base64 "0.1.0"
-    js-yaml "^3.9.1"
+    js-yaml "^3.13.1"
     jsonwebtoken "^8.1.0"
     pkg-conf "^2.0.0"
     promise-events "^0.1.3"
