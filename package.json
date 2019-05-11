@@ -1,47 +1,45 @@
-const trust = [
-	'got',
-	'axios',
-	'request',
-	'request-promise-native',
-	'debug',
-	'telegraf',
-	'telegraf-test',
-	'meow',
-	'update-notifier',
-	'xo',
-	'ava',
-	'choosealicense-list',
-	'enquirer',
-	'is-online',
-	'lodash',
-	'minimist',
-	'handlebars',
-	'express',
-	'vue',
-	'cross-env',
-	'nuxt',
-	'uikit',
-	'nodemon',
-	'node-fetch'
-]
-
-const noPin = deps => {
-	Object.keys(deps).map(dep => {
-		if (trust.includes(dep)) {
-			if (!deps[dep].startsWith('^')) {
-				deps[dep] = `^${deps[dep]}`
-			}
-		}
-	})
-	return deps
-}
-
-module.exports = ctx => {
-	if (!ctx.data.dependencies) {
-		return false
-	}
-
-	ctx.data.dependencies = noPin(ctx.data.dependencies)
-	ctx.data.devDependencies = noPin(ctx.data.devDependencies)
-	return ctx.data
+{
+  "name": "add-license-bot",
+  "version": "1.3.3",
+  "description": "Generate LICENSE file from package.json",
+  "author": "TiagoDanin <TiagoDanin@outlook.com>",
+  "license": "MIT",
+  "repository": "https://github.com/TiagoDanin/Add-License-Bot.git",
+  "homepage": "http://TiagoDanin.github.io/Add-License-Bot",
+  "bugs": "https://github.com/TiagoDanin/Add-License-Bot/issues",
+  "keywords": [
+    "probot",
+    "github",
+    "probot-app",
+    "license",
+    "licenses"
+  ],
+  "scripts": {
+    "dev": "nodemon",
+    "start": "probot run ./index.js",
+    "test": "jest",
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+  },
+  "dependencies": {
+    "probot": "7.5.1",
+    "choosealicense-list": "1.1.1"
+  },
+  "devDependencies": {
+    "jest": "23.6.0",
+    "nodemon": "1.18.10",
+    "smee-client": "1.1.0"
+  },
+  "engines": {
+    "node": ">= 9"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "nodemonConfig": {
+    "exec": "npm start",
+    "watch": [
+      ".env",
+      "."
+    ]
+  }
 }
