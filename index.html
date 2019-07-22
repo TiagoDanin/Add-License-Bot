@@ -81,7 +81,8 @@ baseURL: https://tiagodanin.github.io
 
 
 <div class="uk-container">
-	<h1 id="add-license-bot-build-status"><a href="#add-license-bot-build-status">Add License Bot <a href="https://travis-ci.org/TiagoDanin/Add-License-Bot"><img src="https://travis-ci.org/TiagoDanin/Add-License-Bot.svg?branch=master" alt="Build Status"></a></a></h1>
+	<h1 id="add-license-bot"><a href="#add-license-bot">Add License Bot</a></h1>
+<p><a href="https://travis-ci.org/TiagoDanin/Add-License-Bot"><img src="https://img.shields.io/travis/TiagoDanin/Add-License-Bot.svg?branch=master&#x26;style=flat-square" alt="Travis"></a> <a href="https://npmjs.org/package/add-license-bot"><img src="https://img.shields.io/npm/dt/add-license-bot.svg?style=flat-square" alt="Downloads"></a> <a href="https://npmjs.org/package/add-license-bot"><img src="https://img.shields.io/node/v/add-license-bot.svg?style=flat-square" alt="Node"></a> <a href="https://npmjs.org/package/add-license-bot"><img src="https://img.shields.io/npm/v/add-license-bot.svg?style=flat-square" alt="Version"></a> <a href="https://github.com/xojs/xo"><img src="https://img.shields.io/badge/code%20style-XO-red.svg?style=flat-square" alt="XO code style"></a></p>
 <p><img src="https://user-images.githubusercontent.com/5731176/48219879-8dd01e80-e36c-11e8-9d5f-d0c386343cf7.png" alt="image"></p>
 <h2 id="summary"><a href="#summary">Summary</a></h2>
 <p>If your repository does not have a file with name:</p>
@@ -110,18 +111,22 @@ npm install
 <span class="hljs-comment"># Run the bot</span>
 npm start</code></pre>
 <h2 id="tests"><a href="#tests">Tests</a></h2>
-<pre><code class="hljs language-sh">npm install --save-dev
-npm <span class="hljs-built_in">test</span></code></pre>
+<p>To run the test suite, first install the dependencies, then run <code>test</code>:</p>
+<pre><code class="hljs language-sh"><span class="hljs-comment"># NPM</span>
+npm <span class="hljs-built_in">test</span>
+<span class="hljs-comment"># Or Using Yarn</span>
+yarn <span class="hljs-built_in">test</span></code></pre>
 <h2 id="dependencies"><a href="#dependencies">Dependencies</a></h2>
 <ul>
+<li><a href="https://ghub.io/choosealicense-list">choosealicense-list</a>: List of licenses from choosealicense.com</li>
 <li><a href="https://ghub.io/probot">probot</a>: 🤖 A framework for building GitHub Apps to automate and improve your workflow</li>
-<li><a href="https://ghub.io/spdx-license-list">spdx-license-list</a>: List of SPDX licenses</li>
 </ul>
 <h2 id="dev-dependencies"><a href="#dev-dependencies">Dev Dependencies</a></h2>
 <ul>
 <li><a href="https://ghub.io/jest">jest</a>: Delightful JavaScript Testing.</li>
 <li><a href="https://ghub.io/nodemon">nodemon</a>: Simple monitor script for use during development of a node.js app.</li>
 <li><a href="https://ghub.io/smee-client">smee-client</a>: Client to proxy webhooks to local host</li>
+<li><a href="https://ghub.io/xo">xo</a>: JavaScript happiness style linter ❤️</li>
 </ul>
 <h2 id="contributing"><a href="#contributing">Contributing</a></h2>
 <p>If you have suggestions for how Add-License-Bot could be improved, or want to report a bug, open an issue! We'd love all and any contributions.</p>
