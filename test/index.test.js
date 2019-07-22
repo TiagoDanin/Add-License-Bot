@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
 const {Application} = require('probot')
-const myProbotApp = require('..')
-
 const payload = require('./fixtures/installation.json')
+const myProbotApp = require('..')
 
 describe('Add License Bot', () => {
 	let app
