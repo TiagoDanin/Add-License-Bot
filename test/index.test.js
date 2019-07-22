@@ -1,31 +1,33 @@
-const { Application } = require('probot')
+/* eslint-disable no-undef */
+const {Application} = require('probot')
 const myProbotApp = require('..')
 
 const payload = require('./fixtures/installation.json')
 
 describe('Add License Bot', () => {
-	let app, github
+	let app
+	let github
 	beforeEach(() => {
 		app = new Application()
 		app.load(myProbotApp)
 		github = {
-			repos : {
+			repos: {
 				getContent: jest.fn()
-				.mockImplementationOnce(() => Promise.resolve({}) )
-				.mockImplementationOnce(() => Promise.resolve({}) )
-				.mockImplementationOnce(() => Promise.resolve({}) )
-				.mockImplementationOnce(() => Promise.resolve({}) )
-				.mockImplementationOnce(() => {
-					return Promise.resolve({
-						data: {
-							content: Buffer.from(`{
+					.mockImplementationOnce(() => Promise.resolve({}))
+					.mockImplementationOnce(() => Promise.resolve({}))
+					.mockImplementationOnce(() => Promise.resolve({}))
+					.mockImplementationOnce(() => Promise.resolve({}))
+					.mockImplementationOnce(() => {
+						return Promise.resolve({
+							data: {
+								content: Buffer.from(`{
 								"author": "TiagoDanin <TiagoDanin@outlook.com>",
 								"license": "MIT"
 							}`).toString('base64'),
-							sha: '000000'
-						}
-					})
-				}),
+								sha: '000000'
+							}
+						})
+					}),
 				createFile: jest.fn().mockReturnValue(Promise.resolve({
 					data: {
 						commit: {
@@ -44,7 +46,7 @@ describe('Add License Bot', () => {
 	test('installation', async () => {
 		await app.receive({
 			name: 'installation',
-			payload: payload
+			payload
 		})
 		expect(github.repos.createCommitComment).toHaveBeenCalled()
 	})

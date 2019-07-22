@@ -1,4 +1,7 @@
-# Add License Bot [![Build Status](https://travis-ci.org/TiagoDanin/Add-License-Bot.svg?branch=master)](https://travis-ci.org/TiagoDanin/Add-License-Bot)
+# Add License Bot
+
+[![Travis](https://img.shields.io/travis/TiagoDanin/Add-License-Bot.svg?branch=master&style=flat-square)](https://travis-ci.org/TiagoDanin/Add-License-Bot) [![Downloads](https://img.shields.io/npm/dt/add-license-bot.svg?style=flat-square)](https://npmjs.org/package/add-license-bot) [![Node](https://img.shields.io/node/v/add-license-bot.svg?style=flat-square)](https://npmjs.org/package/add-license-bot) [![Version](https://img.shields.io/npm/v/add-license-bot.svg?style=flat-square)](https://npmjs.org/package/add-license-bot) [![XO code style](https://img.shields.io/badge/code%20style-XO-red.svg?style=flat-square)](https://github.com/xojs/xo)
+
 
 ![image](https://user-images.githubusercontent.com/5731176/48219879-8dd01e80-e36c-11e8-9d5f-d0c386343cf7.png)
 
@@ -33,21 +36,26 @@ npm start
 
 ## Tests
 
+To run the test suite, first install the dependencies, then run `test`:
+
 ```sh
-npm install --save-dev
+# NPM
 npm test
+# Or Using Yarn
+yarn test
 ```
 
 ## Dependencies
 
+- [choosealicense-list](https://ghub.io/choosealicense-list): List of licenses from choosealicense.com
 - [probot](https://ghub.io/probot): 🤖 A framework for building GitHub Apps to automate and improve your workflow
-- [spdx-license-list](https://ghub.io/spdx-license-list): List of SPDX licenses
 
 ## Dev Dependencies
 
 - [jest](https://ghub.io/jest): Delightful JavaScript Testing.
 - [nodemon](https://ghub.io/nodemon): Simple monitor script for use during development of a node.js app.
 - [smee-client](https://ghub.io/smee-client): Client to proxy webhooks to local host
+- [xo](https://ghub.io/xo): JavaScript happiness style linter ❤️
 
 ## Contributing
 
