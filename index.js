@@ -21,7 +21,7 @@ module.exports = app => {
 
 		app.log('License:', licenseRaw)
 		app.log('Create file', params)
-		return github.repos.createFile({
+		return github.repos.createOrUpdateFile({
 			...params,
 			path: 'LICENSE',
 			message: 'feat: add missing LICENSE',
@@ -50,7 +50,7 @@ Repository owner: @${params.owner}
 		app.log('Analyzed', params)
 		for (const filename of files) {
 			params.path = filename
-			const res = await github.repos.getContent(params).catch(() => false)
+			const res = await github.repos.getContents(params).catch(() => false)
 			if (res && res.data) {
 				app.log('Found license file', params)
 				return res
@@ -58,7 +58,7 @@ Repository owner: @${params.owner}
 		}
 
 		params.path = 'package.json'
-		return github.repos.getContent(params).then(async res => {
+		return github.repos.getContents(params).then(async res => {
 			if (res && res.data && res.data.sha) {
 				app.log('Found package.json', params)
 				let content = Buffer.from(res.data.content, 'base64').toString()

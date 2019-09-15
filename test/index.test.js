@@ -11,7 +11,7 @@ describe('Add License Bot', () => {
 		app.load(myProbotApp)
 		github = {
 			repos: {
-				getContent: jest.fn()
+				getContents: jest.fn()
 					.mockImplementationOnce(() => Promise.resolve({}))
 					.mockImplementationOnce(() => Promise.resolve({}))
 					.mockImplementationOnce(() => Promise.resolve({}))
@@ -27,7 +27,7 @@ describe('Add License Bot', () => {
 							}
 						})
 					}),
-				createFile: jest.fn().mockReturnValue(Promise.resolve({
+				createOrUpdateFile: jest.fn().mockReturnValue(Promise.resolve({
 					data: {
 						commit: {
 							sha: {
