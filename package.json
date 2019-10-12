@@ -49,7 +49,7 @@
 	],
 	"dependencies": {
 		"choosealicense-list": "^1.1.1",
-		"probot": "9.5.2"
+		"probot": "9.5.3"
 	},
 	"devDependencies": {
 		"jest": "23.6.0",
