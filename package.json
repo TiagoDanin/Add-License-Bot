@@ -48,7 +48,7 @@
 		"package.json"
 	],
 	"dependencies": {
-		"choosealicense-list": "^1.1.1",
+		"choosealicense-list": "^1.2.0",
 		"probot": "9.11.3"
 	},
 	"devDependencies": {

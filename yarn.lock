@@ -1455,10 +1455,10 @@ chokidar@^3.2.2:
   optionalDependencies:
     fsevents "~2.1.1"
 
-choosealicense-list@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/choosealicense-list/-/choosealicense-list-1.1.1.tgz#6bb2e1af21a48ffe3c613dbad5a9161364ad69c4"
-  integrity sha512-9MlmERjGCs2ewxbYBh66KZzJU9o/CTm/Z1w2QDTRtdno0yM3odWlIj3CgPJ/KocAH4Bg5TkaiAUWcPE3ZLMBwA==
+choosealicense-list@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/choosealicense-list/-/choosealicense-list-1.2.0.tgz#8f617b28bc3623dfc2e6b4863d6e770ba932a5e6"
+  integrity sha512-Dhg8yb5DWCtTL+jZpCbj+swtqfeQb8fRMNGKTvYqTgM2CfXdLYqyklEivJK4RiCCjMF5Y3/xs0AA/+tVbbfzaA==
 
 ci-info@^2.0.0:
   version "2.0.0"
