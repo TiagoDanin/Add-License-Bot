@@ -9,68 +9,68 @@ module.exports = app => {
 		'license.md'
 	]
 
-	const createFile = async (github, params, license, author) => {
+	const createFile = async (github, parameters, license, author) => {
 		const licenseRaw = license.body
-			.replace(/\[year\]/gi, new Date().getFullYear())
-			.replace(/\[fullname\]/gi, author)
-			.replace(/\[login\]/gi, author)
-			.replace(/\s\(\[email\]\)/gi, '')
-			.replace(/\[project\]/gi, params.repo)
-			.replace(/\[description\]/gi, '')
-			.replace(/\[projecturl\]/gi, `https://github.com/${params.owner}/${params.repo}`)
+			.replace(/\[year]/gi, new Date().getFullYear())
+			.replace(/\[fullname]/gi, author)
+			.replace(/\[login]/gi, author)
+			.replace(/\s\(\[email]\)/gi, '')
+			.replace(/\[project]/gi, parameters.repo)
+			.replace(/\[description]/gi, '')
+			.replace(/\[projecturl]/gi, `https://github.com/${parameters.owner}/${parameters.repo}`)
 
 		app.log('License:', licenseRaw)
-		app.log('Create file', params)
+		app.log('Create file', parameters)
 		return github.repos.createOrUpdateFile({
-			...params,
+			...parameters,
 			path: 'LICENSE',
 			message: 'feat: add missing LICENSE',
 			content: Buffer.from(licenseRaw).toString('base64')
-		}).then(async res => {
-			if (res && res.data) {
-				app.log('Create commit comment', params)
+		}).then(async response => {
+			if (response && response.data) {
+				app.log('Create commit comment', parameters)
 				return github.repos.createCommitComment({
-					...params,
-					sha: res.data.commit.sha,
+					...parameters,
+					sha: response.data.commit.sha,
 					body: `**License Info.**
 Author: \`${author}\`
 License type: ${license.title}
-Repository owner: @${params.owner}
+Repository owner: @${parameters.owner}
 					`,
 					position: 1,
 					path: 'LICENSE'
-				}).catch(e => e)
+				}).catch(error => error)
 			}
 
 			return 'Falid create file'
 		}).catch(error => error)
 	}
 
-	const checkFiles = async (github, params) => {
-		app.log('Analyzed', params)
+	const checkFiles = async (github, parameters) => {
+		app.log('Analyzed', parameters)
 		for (const filename of files) {
-			params.path = filename
-			const res = await github.repos.getContents(params).catch(() => false)
-			if (res && res.data) {
-				app.log('Found license file', params)
-				return res
+			parameters.path = filename
+			const response = await github.repos.getContents(parameters).catch(() => false)
+			if (response && response.data) {
+				app.log('Found license file', parameters)
+				return response
 			}
 		}
 
-		params.path = 'package.json'
-		return github.repos.getContents(params).then(async res => {
-			if (res && res.data && res.data.sha) {
-				app.log('Found package.json', params)
-				let content = Buffer.from(res.data.content, 'base64').toString()
+		parameters.path = 'package.json'
+		return github.repos.getContents(parameters).then(async response => {
+			if (response && response.data && response.data.sha) {
+				app.log('Found package.json', parameters)
+				let content = Buffer.from(response.data.content, 'base64').toString()
 				try {
 					content = JSON.parse(content)
-				} catch (e) {
-					app.log('Invalid package.json', params)
-					return e
+				} catch (error) {
+					app.log('Invalid package.json', parameters)
+					return error
 				}
 
 				const licenseType = (content.license || '').toString()
-				let author = params.owner
+				let author = parameters.owner
 				if (typeof content.author === 'object' && content.author.name) {
 					author = content.author.name
 					if (content.author.email) {
@@ -82,13 +82,14 @@ Repository owner: @${params.owner}
 
 				app.log('Package.json', licenseType, author)
 
+				// eslint-disable-next-line unicorn/no-fn-reference-in-iterator
 				const license = choosealicense.find(licenseType)
 				if (license) {
 					return createFile(
 						github,
 						{
-							owner: params.owner,
-							repo: params.repo
+							owner: parameters.owner,
+							repo: parameters.repo
 						},
 						license,
 						author
@@ -97,7 +98,7 @@ Repository owner: @${params.owner}
 
 				return 'Not found license'
 			}
-		}).catch(e => e)
+		}).catch(error => error)
 	}
 
 	app.on([
