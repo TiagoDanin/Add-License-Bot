@@ -52,7 +52,7 @@
 		"probot": "10.8.0"
 	},
 	"devDependencies": {
-		"jest": "26.0.1",
+		"jest": "26.4.2",
 		"nodemon": "^2.0.4",
 		"smee-client": "1.1.0",
 		"xo": "^0.33.1"
