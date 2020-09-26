@@ -54,7 +54,7 @@
 	"devDependencies": {
 		"jest": "26.0.1",
 		"nodemon": "^2.0.4",
-		"smee-client": "1.1.0",
+		"smee-client": "1.2.2",
 		"xo": "^0.33.1"
 	},
 	"xo": {
