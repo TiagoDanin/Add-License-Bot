@@ -24,7 +24,7 @@
 		"test:watch": "jest --watch --notify --notifyMode=change --coverage"
 	},
 	"engines": {
-		"node": ">= v14.16.1"
+		"node": ">= v16.17.1"
 	},
 	"private": false,
 	"repository": {
